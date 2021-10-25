@@ -82,6 +82,12 @@ public class MainSceneController
 		// set [PAYMENT DATE] to 1-1-2021 default value
 		LocalDate date = LocalDate.of(2021, 1, 1);
 		paymentDate.setValue(date); 
+		// disable [paymentButton], [financialAid], [setButton], [tristateDiscountBox], [tristateSetButton]
+		paymentButton.setDisable(true);
+		setButton.setDisable(true);
+		financialAid.setDisable(true);
+		tristateDiscountBox.setDisable(true);
+		tristateSetButton.setDisable(true);
 	}
 	
 	// this method sets the status of the states to either enabled/disabled and selected/unselected
@@ -228,6 +234,8 @@ public class MainSceneController
 	@FXML
 	private ToggleGroup paymentsMajorCheck; // for choosing the student major in the second tab
 	@FXML
+	private Button enterStudentButton; // stuff to enter student
+	@FXML
 	private RadioButton csButton2, eeButton2, meButton2, itButton2, baButton2; // majors
 	@FXML
 	private TextField paymentAmount; // for inputting payment amount
@@ -240,9 +248,31 @@ public class MainSceneController
 	@FXML
 	private Button setButton; // for setting the financial aid
 	@FXML
-	private CheckBox tristateDiscountBox; // for setting tristate discount 
+	private CheckBox tristateDiscountBox; // for checking tristate discount 
+	@FXML
+	private Button tristateSetButton; // for setting tristate discount
 	@FXML
 	private TextArea messageBoxTab2; // for printing out error and success messages
+	
+	@FXML
+	void enter_student_tab2(ActionEvent event)
+	{
+		// FIND STUDENT
+		
+		paymentButton.setDisable(false);
+		// if student is resident, enable [financialAid] and [setButton]
+		if (true) // CHANGE TO >if (student is a resident)
+		{
+			financialAid.setDisable(false);
+			setButton.setDisable(false);
+		}
+		// if student is tristate, enable [tristateDiscountBox] and [tristateSetButton]
+		if (true) // CHANGE TO >if (student is a tristate)
+		{
+			tristateDiscountBox.setDisable(false);
+			tristateSetButton.setDisable(false);
+		}
+	}
 	
     @FXML
     void pay_tuition(ActionEvent event) // this is for paying tuition 

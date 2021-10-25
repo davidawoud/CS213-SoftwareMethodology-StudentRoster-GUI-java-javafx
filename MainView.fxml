@@ -85,13 +85,14 @@
                   <Label layoutX="22.0" layoutY="132.0" text="Payment Date" />
                   <DatePicker fx:id="paymentDate" editable="false" layoutX="101.0" layoutY="128.0" prefHeight="26.0" prefWidth="186.0" />
                   <Label layoutX="22.0" layoutY="169.0" text="Financial Aid Amount" />
-                  <Button layoutX="300.0" layoutY="128.0" mnemonicParsing="false" onAction="#pay_tuition" text="Pay" />
+                  <Button fx:id="paymentButton" layoutX="300.0" layoutY="128.0" mnemonicParsing="false" onAction="#pay_tuition" text="Pay" />
                   <TextField fx:id="financialAid" layoutX="148.0" layoutY="165.0" prefHeight="26.0" prefWidth="140.0" />
-                  <Button layoutX="300.0" layoutY="166.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="35.0" text="Set" />
+                  <Button fx:id="setButton" layoutX="300.0" layoutY="166.0" mnemonicParsing="false" onAction="#set_financial_aid" prefHeight="26.0" prefWidth="35.0" text="Set" />
                   <TextArea layoutX="14.0" layoutY="224.0" prefHeight="131.0" prefWidth="572.0" />
                   <Label layoutX="141.0" layoutY="170.0" text="\$" />
-                  <CheckBox fx:id="tristateDiscountBox" layoutX="464.0" layoutY="57.0" mnemonicParsing="false" text="Tri-State Discount" />
-                  <Button fx:id="tristateSetButton" layoutX="506.0" layoutY="80.0" mnemonicParsing="false" onAction="#set_tristate_discount" text="Set" />
+                  <CheckBox fx:id="tristateDiscountBox" layoutX="463.0" layoutY="141.0" mnemonicParsing="false" text="Tri-State Discount" />
+                  <Button fx:id="tristateSetButton" layoutX="506.0" layoutY="166.0" mnemonicParsing="false" onAction="#set_tristate_discount" text="Set" />
+                  <Button fx:id="enterStudentButton" layoutX="416.0" layoutY="52.0" mnemonicParsing="false" onAction="#enter_student_tab2" prefHeight="26.0" prefWidth="165.0" text="Enter Student" />
                </children></AnchorPane>
       </content>
     </Tab>
