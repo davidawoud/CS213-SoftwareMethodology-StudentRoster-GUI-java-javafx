@@ -1,0 +1,167 @@
+{Tests printing out empty list}
+Input Tab 3: [Print List]
+Output: Error message that states that there is nothing in the roster
+Input Tab 3: [Print by Name]
+Output: Error message that states that there is nothing in the roster.
+Input Tab 3: [Print by Date]
+Output: Error message that states that there is nothing in the roster.
+
+{Tests adding a student}
+Input Tab 1: [Name] John Doe [Major] CS [Resident] [Credit] 18 [Add Student] 
+Output: Message that states that student was added. 
+Input Tab 1: [Name] Bob McBob [Major] IT [NonResident][International] [Credit] 15
+Output: Message that states that student was added. 
+Input Tab 1: [Name] Joe Mama [Major] EE [NonResident][International][Study Abroad] [Credit] 12 [Add Student] 
+Output: Message that states that student was added. 
+Input Tab 1: [Name] Sunny McSunnyface [Major] BA [Resident] [Credit] 10 [Add Student] 
+Output: Message that states that student was added. 
+
+{Tests adding a duplicate student}
+Input Tab 1: [Name] John Doe [Major] CS [Resident] [Credit] 18 [Add Student] 
+Output: Error message that states that the student is already in the roster. 
+
+{Tests adding a student with missing data}
+Input Tab 1: [Name] Bob Doe [NonResident][Tristate][New York] [Credit] 18
+Output: Error message that states that there is missing data. 
+Input Tab 1: [NonResident][Tristate][New York] [Credit] 18
+Output: Error message that states that there is missing data.
+
+{Tests removing a nonexistant student}
+Input Tab 1: [Name] Ben Neb [Major] EE [Remove Student] 
+Output: Error message that states student does not exist. 
+
+{Tests removing a student with missing data}
+Input Tab 2: [Name] Joe Mama [Remove Student] 
+Output: Error message that states that there is missing data.
+
+{Tests removing a student}
+Input Tab 1: [Name] Joe Mama [Major] EE [Remove Student] 
+Output: Message that states that student was removed. 
+
+{Tests prints the list of students}
+Input Tab 3: [Print List]
+Output: John Doe:CS:18 Credit Hours:Tuition Due:0.00:Total Payment:0.00:Last Payment Date: --/--/--:Resident
+        Bob McBob:IT:15 Credit Hours:Tuition Due:0.00:Total Payment:0.00:Last Payment Date: --/--/--:NonResident:International
+        Sunny McSunnyface:BA:10 Credit Hours:Tuition Due:0.00:Total Payment:0.00:Last Payment Date: --/--/--:Resident
+
+{Tests prints by name}
+Input Tab 3: [Print by Name]
+Output: Bob McBob:IT:15 Credit Hours:Tuition Due:0.00:Total Payment:0.00:Last Payment Date: --/--/--:NonResident:International
+        John Doe:CS:18 Credit Hours:Tuition Due:0.00:Total Payment:0.00:Last Payment Date: --/--/--:Resident
+        Sunny McSunnyface:BA:10 Credit Hours:Tuition Due:0.00:Total Payment:0.00:Last Payment Date: --/--/--:Resident
+
+{Tests calculate tuition}
+Input Tab 3: [Calculate Tuition] 
+Input Tab 3: [Print List]
+Output: John Doe:CS:18 Credit Hours:Tuition Due:16612.00:Total Payment:0.00:Last Payment Date: --/--/--:Resident
+        Bob McBob:IT:15 Credit Hours:Tuition Due:35655.00:Total Payment:0.00:Last Payment Date: --/--/--:NonResident:International
+        Sunny McSunnyface:BA:10 Credit Hours:Tuition Due:6654.40:Total Payment:0.00:Last Payment Date: --/--/--:Resident
+
+{Test paying tuition with missing data}
+Input Tab 2: [Name] John Doe [Enter Student]
+Output: Error message that states that there is missing data.
+
+{Test paying tuition with a nonexistant student}
+Input Tab 2: [Name] Bob Bob [Major] CS [Enter Student]
+Output: Error message that states that the student does not exist.
+
+{Test paying tuition with invalid payment amount}
+Input Tab 2: [Name] John Doe [Major] CS [Enter Student] [Payment Amount] $-10 [Date] 1/1/2021 [Pay]
+Output: Error message that states that the payment amount is invalid. 
+
+{Test paying tuition with future date}
+Input Tab 2: [Name] John Doe [Major] CS [Enter Student] [Payment Amount] $10 [Date] 12/1/2021 [Pay]
+Output: Error message that states that the date is invalid. 
+
+{Test paying tuition with invalid date}
+Input Tab 2: [Name] John Doe [Major] CS [Enter Student] [Payment Amount] $10 [Date] 5/1/2020 [Pay]
+Output: Error message that states that the date is invalid. 
+
+{Tests overpaying tuition}
+Input Tab 2: [Name] John Doe [Major] CS [Enter Student] [Payment Amount] $1000000 [Date] 5/1/2020 [Pay]
+Output: Error message that states that the payment amount is over the total amount due. 
+
+{Test paying tuition}
+Input Tab 2: [Name] John Doe [Major] CS [Enter Student] [Payment Amount] $10000 [Date] 5/1/2021 [Pay]
+Input Tab 3: [Print List]
+Output: John Doe:CS:18 Credit Hours:Tuition Due:6612.00:Total Payment:10000.00:Last Payment Date: 5/1/2021:Resident
+        Bob McBob:IT:15 Credit Hours:Tuition Due:35655.00:Total Payment:0.00:Last Payment Date: --/--/--:NonResident:International
+        Sunny McSunnyface:BA:10 Credit Hours:Tuition Due:6654.40:Total Payment:0.00:Last Payment Date: --/--/--:Resident
+
+{Tests prints by date}
+Input Tab 2: [Name] Bob McBob [Major] IT [Enter Student] [Payment Amount] $30000 [Date] 4/1/2021 [Pay]
+Input Tab 2: [Name] Sunny McSunnyface [Major]  [Enter Student] [Payment Amount] $1000 [Date] 2/1/2021 [Pay]
+Input Tab 3: [Print by Date]
+Output: Sunny McSunnyface:BA:10 Credit Hours:Tuition Due:5654.40:Total Payment:1000.00:Last Payment Date: 2/1/2021:Resident
+        Bob McBob:IT:15 Credit Hours:Tuition Due:5655.00:Total Payment:30000.00:Last Payment Date: 4/1/2021:NonResident:International
+        John Doe:CS:18 Credit Hours:Tuition Due:5612.00:Total Payment:1000.00:Last Payment Date: 5/1/2021:Resident
+
+{Tests updating study abroad for an international student}
+Input Tab 1: [Name] Bob McBob [Major] IT [NonResident][International][Study Abroad] [Credit] 15
+Output: Message that states that tuition was updated. 
+Input Tab 3: [Print List]
+Output: Sunny McSunnyface:BA:10 Credit Hours:Tuition Due:5654.40:Total Payment:1000.00:Last Payment Date: 2/1/2021:Resident
+        Bob McBob:IT:12 Credit Hours:Tuition Due:5918.00:Total Payment:0.00:Last Payment Date: --/--/--:NonResident:International
+        John Doe:CS:18 Credit Hours:Tuition Due:5612.00:Total Payment:1000.00:Last Payment Date: 5/1/2021:Resident
+
+{Tests tristate discount}
+Input Tab 1: [Name] John Doe [Major] CS [Remove Student] 
+Output: Message that states that student was removed.
+Input Tab 1: [Name] Bob McBob [Major] IT [Remove Student] 
+Output: Message that states that student was removed.
+Input Tab 1: [Name] Sunny McSunnyface [Major] BA [Remove Student] 
+Output: Message that states that student was removed.
+Input Tab 1: [Name] Bob NY [Major] IT [NonResident][Tristate][NY] [Credit] 12 [Add Student] 
+Output: Message that states that student was added. 
+Input Tab 1: [Name] Bob CT [Major] IT [NonResident][Tristate][CT] [Credit] 12 [Add Student] 
+Output: Message that states that student was added. 
+Input Tab 3: [Print List]
+Input Tab 3: [Calculate Tuition]
+Output: Bob NY:IT:12 Credit Hours:Tuition Due:33005.00:Total Payment:0.00:Last Payment Date: --/--/--:NonResident:New York
+        Bob CT:IT:12 Credit Hours:Tuition Due:33005.00:Total Payment:0.00:Last Payment Date: --/--/--:NonResident:Connecticut
+Input Tab 2: [Name] Bob NY [Major] IT [Enter Student] [Tri-State Discount] [Set]
+Input Tab 2: [Name] Bob CT [Major] IT [Enter Student] [Tri-State Discount] [Set]
+Input Tab 3: [Print List]
+Output: Bob NY:IT:12 Credit Hours:Tuition Due:29005.00:Total Payment:0.00:Last Payment Date: --/--/--:NonResident:New York
+        Bob CT:IT:12 Credit Hours:Tuition Due:28005.00:Total Payment:0.00:Last Payment Date: --/--/--:NonResident:Connecticut
+
+{Tests financial aid for nonexistant student}
+Input Tab 1: [Name] Bob NY [Major] IT [Remove Student] 
+Output: Message that states that student was removed.
+Input Tab 1: [Name] Bob CT [Major] IT [Remove Student] 
+Output: Message that states that student was removed.
+Input Tab 1: [Name] Bob NY [Major] IT [Resident] [Credit] 12 [Add Student] 
+Output: Message that states that student was added. 
+Input Tab 1: [Name] Bob Financial [Major] IT [Resident] [Credit] 12 [Add Student] 
+Output: Message that states that student was added. 
+Input Tab 2: [Name] John Financial [Major] IT [Enter Student] 
+Output: Error message that states that student is not in the roster.
+
+{Tests missing financial aid amount}
+Input Tab 2: [Name] Bob Financial [Major] IT [Enter Student] [Set]
+Output: Error message that states that there is missing data.
+
+{Tests invalid financial aid amount}
+Input Tab 2: [Name] Bob Financial [Major] IT [Enter Student] [Financial Aid Amount] -10 [Set]
+Output: Error message that states the amount is invalid.
+Input Tab 2: [Name] Bob Financial [Major] IT [Enter Student] [Financial Aid Amount] 200000 [Set]
+Output: Error message that states the amount is invalid.
+
+{Tests giving financial aid amount to part time students}
+Input Tab 1: [Name] John Financial [Major] IT [Resident] [Credit] 5 [Add Student] 
+Output: Message that states that student was added. 
+Input Tab 2: [Name] John Financial [Major] IT [Enter Student] [Financial Aid Amount] 1000 [Set]
+Output: Error message that states thet parttime students are not allowed to have financial aid. 
+
+{Tests giving financial aid}
+Input Tab 1: [Name] John Financial [Major] IT [Remove Student] 
+Output: Message that states that student was removed.
+Input Tab 2: [Name] Bob Financial [Major] IT [Enter Student] [Financial Aid Amount] 5000 [Set]
+Output: Message that states that financial aid was awarded.
+Input Tab 3: [Calculate Tuition]
+Input Tab 3: [Print List]
+Output: Bob Financial:IT:12 Credit Hours:Tuition Due:10804.00:Total Payment:0.00:Last Payment Date: --/--/--:Resident
+
+{Tests giving financial aid twice}
+Input Tab 2: [Name] Bob Financial [Major] IT [Enter Student] [Financial Aid Amount] 5000 [Set]
+Output: Error message that states that Student cannot receive financial aid twice. 
