@@ -122,6 +122,7 @@ public class TuitionManagerController
 	{
 		tristateBox.setDisable(false);
 		internationalCheckBox.setDisable(false);
+		creditSlider.setDisable(false);
 	}
 	
 	/**
@@ -138,6 +139,7 @@ public class TuitionManagerController
 		studyAbroadBox.setDisable(true);
 		studyAbroadBox.setSelected(false);
 		setStateStatus(stateCheckBox, true, false); 
+		creditSlider.setDisable(false);
 	}
 	
 	/**
@@ -150,6 +152,7 @@ public class TuitionManagerController
 		studyAbroadBox.setDisable(true);
 		studyAbroadBox.setSelected(false);
 		setStateStatus(stateCheckBox, false, true); 
+		creditSlider.setDisable(false);
 	}
 	
 	/**
@@ -170,10 +173,10 @@ public class TuitionManagerController
 	@FXML
 	void studyAbroad_Event(ActionEvent event) // this  disables credit hours
 	{
-		if (creditSlider.isDisabled())
-		    creditSlider.setDisable(false);
+		if (studyAbroadBox.isSelected())
+		    creditSlider.setDisable(true);
 		else
-			creditSlider.setDisable(true);
+			creditSlider.setDisable(false);
 	}
 	
 	/**
@@ -401,6 +404,8 @@ public class TuitionManagerController
 	@FXML
 	private RadioButton csButton2, eeButton2, meButton2, itButton2, baButton2; // majors
 	@FXML
+	private Button studyAbroad; // for setting studyAbroad
+	@FXML
 	private TextField paymentAmount; // for inputting payment amount
 	@FXML
 	private DatePicker paymentDate; // for setting the payment date
@@ -614,6 +619,60 @@ public class TuitionManagerController
 				messageBoxTab2.appendText("Tuition updated.\n"); 
             else 
             	messageBoxTab2.appendText("Student not in the roster.\n");
+		}
+		catch (Exception e)
+		{
+			messageBoxTab2.appendText(e.getMessage() + "\n");
+			return;
+		}
+    }
+    
+    /**
+	This button takes allows international student to enroll in the Study Abroad program
+	@param event - when user clicks on Enroll in Study Abroad Program
+	*/
+    @FXML
+    void setStudyAbroad(ActionEvent event)
+    {
+	
+    	String name;
+		Major major;
+		
+		try
+		{
+			name = getNameTab2();
+			major = getMajorTab2();
+		}
+		catch(NumberFormatException e)
+		{
+			messageBoxTab2.appendText("Invalid financial aid, please enter a float.\n");
+			return;
+		}
+		catch(Exception e)
+		{
+			messageBoxTab2.appendText(e.getMessage());
+			e.printStackTrace();
+			return;
+		}
+		
+        Student student = null;
+		
+		try
+		{
+			student = new Student(new Profile(name,major.toString()));
+		}
+		catch (Exception e)
+		{
+			messageBoxTab2.appendText(e.getMessage() + "\n");
+			return;
+		}
+		
+		try
+		{
+			if (studentRoster.setStudyAbroad(student, true))
+				messageBoxTab2.appendText("Tuition updated.\n"); 
+            else 
+            	messageBoxTab2.appendText("Couldn't find the international student.\n");
 		}
 		catch (Exception e)
 		{

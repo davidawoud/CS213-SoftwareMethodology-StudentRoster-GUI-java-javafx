@@ -89,6 +89,7 @@
                   <Button fx:id="setButton" layoutX="300.0" layoutY="166.0" mnemonicParsing="false" onAction="#set_financial_aid" prefHeight="26.0" prefWidth="51.0" text="Set" />
                   <TextArea fx:id="messageBoxTab2" layoutX="14.0" layoutY="224.0" prefHeight="131.0" prefWidth="572.0" />
                   <Label layoutX="141.0" layoutY="170.0" text="\$" />
+                  <Button fx:id="studyAbroad" layoutX="387.0" layoutY="53.0" mnemonicParsing="false" onAction="#setStudyAbroad" prefHeight="26.0" prefWidth="195.0" text="Enroll in Study Abroad Program" />
                </children></AnchorPane>
       </content>
     </Tab>
