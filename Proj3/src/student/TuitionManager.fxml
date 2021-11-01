@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="student.TuitionManagerController">
+  <tabs>
+    <Tab text="Student Profiles">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="14.0" text="Name" />
+                  <TextField fx:id="nameTextBox" layoutX="56.0" layoutY="10.0" prefHeight="26.0" prefWidth="530.0" />
+                  <Label layoutX="16.0" layoutY="49.0" text="Major" />
+                  <RadioButton fx:id="csButton" layoutX="72.0" layoutY="49.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="42.0" text="CS">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="majorCheckBox" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="eeButton" layoutX="132.0" layoutY="49.0" mnemonicParsing="false" text="EE" toggleGroup="$majorCheckBox" />
+                  <RadioButton fx:id="meButton" layoutX="191.0" layoutY="49.0" mnemonicParsing="false" text="ME" toggleGroup="$majorCheckBox" />
+                  <RadioButton fx:id="itButton" layoutX="257.0" layoutY="49.0" mnemonicParsing="false" text="IT" toggleGroup="$majorCheckBox" />
+                  <RadioButton fx:id="baButton" layoutX="311.0" layoutY="49.0" mnemonicParsing="false" text="BA" toggleGroup="$majorCheckBox" />
+                  <Label layoutX="16.0" layoutY="83.0" text="Status" />
+                  <RadioButton fx:id="residentButton" layoutX="72.0" layoutY="83.0" mnemonicParsing="false" onAction="#resident_Event" text="Resident">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="isResident" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="nonResidentButton" layoutX="167.0" layoutY="83.0" mnemonicParsing="false" onAction="#non_Resident_Event" text="NonResident" toggleGroup="$isResident" />
+                  <RadioButton fx:id="tristateBox" layoutX="71.0" layoutY="117.0" mnemonicParsing="false" onAction="#tristate_Event" text="Tristate">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="nonResidentType" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="nyButton" layoutX="167.0" layoutY="117.0" mnemonicParsing="false" text="New York">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="stateCheckBox" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="ctButton" layoutX="278.0" layoutY="117.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="87.0" text="Connecticut" toggleGroup="$stateCheckBox" />
+                  <RadioButton fx:id="internationalCheckBox" layoutX="71.0" layoutY="152.0" mnemonicParsing="false" onAction="#international_Event" text="International" toggleGroup="$nonResidentType" />
+                  <CheckBox fx:id="studyAbroadBox" layoutX="194.0" layoutY="152.0" mnemonicParsing="false" onAction="#studyAbroad_Event" text="Study Abroad" />
+                  <Label layoutX="18.0" layoutY="186.0" text="Credit Hours" />
+                  <Slider fx:id="creditSlider" layoutX="97.0" layoutY="188.0" majorTickUnit="1.0" max="24.0" min="3.0" minorTickCount="0" prefHeight="14.0" prefWidth="480.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                  <Button fx:id="addButton" layoutX="32.0" layoutY="234.0" mnemonicParsing="false" onAction="#add_a_student" text="Add Student" />
+                  <Button fx:id="removeButton" layoutX="141.0" layoutY="234.0" mnemonicParsing="false" onAction="#remove_a_student" text="Remove Student" />
+                  <Button layoutX="274.0" layoutY="234.0" mnemonicParsing="false" onAction="#get_tuition_due" text="Tuition Due" />
+                  <TextArea fx:id="tuitionBox" editable="false" layoutX="365.0" layoutY="234.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="200.0" text="\$" />
+                  <TextArea fx:id="messageBox" layoutX="14.0" layoutY="277.0" prefHeight="80.0" prefWidth="572.0" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Payments/Financial Aid">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="20.0" layoutY="22.0" text="Student Name" />
+                  <TextField fx:id="nameTab2" layoutX="108.0" layoutY="18.0" prefHeight="26.0" prefWidth="474.0" />
+                  <Label layoutX="20.0" layoutY="57.0" text="Major" />
+                  <RadioButton fx:id="csButton2" layoutX="65.0" layoutY="57.0" mnemonicParsing="false" text="CS">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="PaymentsMajorCheck" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="eeButton2" layoutX="128.0" layoutY="57.0" mnemonicParsing="false" text="EE" toggleGroup="$PaymentsMajorCheck" />
+                  <RadioButton fx:id="meButton2" layoutX="188.0" layoutY="57.0" mnemonicParsing="false" text="ME" toggleGroup="$PaymentsMajorCheck" />
+                  <RadioButton fx:id="itButton2" layoutX="257.0" layoutY="57.0" mnemonicParsing="false" text="IT" toggleGroup="$PaymentsMajorCheck" />
+                  <RadioButton fx:id="baButton2" layoutX="318.0" layoutY="57.0" mnemonicParsing="false" text="BA" toggleGroup="$PaymentsMajorCheck" />
+                  <Label layoutX="22.0" layoutY="97.0" text="Payment Amount" />
+                  <Label layoutX="131.0" layoutY="97.0" text="\$" />
+                  <TextField fx:id="paymentAmount" layoutX="138.0" layoutY="93.0" />
+                  <Label layoutX="22.0" layoutY="132.0" text="Payment Date" />
+                  <DatePicker fx:id="paymentDate" editable="false" layoutX="101.0" layoutY="128.0" prefHeight="26.0" prefWidth="186.0" />
+                  <Label layoutX="22.0" layoutY="169.0" text="Financial Aid Amount" />
+                  <Button fx:id="paymentButton" layoutX="300.0" layoutY="128.0" mnemonicParsing="false" onAction="#pay_tuition" prefHeight="26.0" prefWidth="51.0" text="Pay" />
+                  <TextField fx:id="financialAid" layoutX="148.0" layoutY="165.0" prefHeight="26.0" prefWidth="140.0" />
+                  <Button fx:id="setButton" layoutX="300.0" layoutY="166.0" mnemonicParsing="false" onAction="#set_financial_aid" prefHeight="26.0" prefWidth="51.0" text="Set" />
+                  <TextArea fx:id="messageBoxTab2" layoutX="14.0" layoutY="224.0" prefHeight="131.0" prefWidth="572.0" />
+                  <Label layoutX="141.0" layoutY="170.0" text="\$" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Process Tuition">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextArea fx:id="messageBoxTab3" layoutX="9.0" layoutY="102.0" prefHeight="251.0" prefWidth="577.0" />
+                  <ButtonBar layoutX="14.0" layoutY="24.0" prefHeight="45.0" prefWidth="338.0">
+                     <buttons>
+                        <Button mnemonicParsing="false" onAction="#calculate_all_tuition" text="Calculate Tuition" />
+                        <MenuButton mnemonicParsing="false" prefHeight="26.0" prefWidth="227.0" text="Print">
+                          <items>
+                            <MenuItem fx:id="printList" mnemonicParsing="false" onAction="#print_list" text="Print List" />
+                            <MenuItem fx:id="printName" mnemonicParsing="false" onAction="#print_by_name" text="Print by Name" />
+                              <MenuItem fx:id="printDate" mnemonicParsing="false" onAction="#print_by_date" text="Print by Date" />
+                          </items>
+                        </MenuButton>
+                     </buttons></ButtonBar>
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+  </tabs>
+</TabPane>
