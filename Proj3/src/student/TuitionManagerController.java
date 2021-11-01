@@ -4,22 +4,22 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.stage.Stage;
-
 import java.time.LocalDate;
-import java.util.InputMismatchException;
 
 import javafx.event.ActionEvent;
 
+/**
+This class is the client driver class that takes in user-inputted information
+and does functions with them using the Roster class
+@author David Halim, Stephen Juan
+*/
 public class TuitionManagerController 
 {
 	private Roster studentRoster;
@@ -74,6 +74,10 @@ public class TuitionManagerController
 	@FXML
 	private TextArea messageBox; // for displaying text messages
 
+	/**
+	This method automatically runs when the GUI is opened. It disables certain fields and creates
+	an instance of Roster.
+	*/
 	public void initialize()
 	{
 		// Set [Tristate] [New York] [Connecticut] [International] [Study Abroad] to disable
@@ -88,7 +92,13 @@ public class TuitionManagerController
 		studentRoster = new Roster();
 	}
 	
-	// this method sets the status of the states to either enabled/disabled and selected/unselected
+	/**
+	This method is a helper method that either disables/enables, selects/deselects the radio buttons
+	in NY or CT.
+	@param stateCheckBox - the toggle group that contains NY or CT
+	@param disable - boolean that is passed to disable/enable radio buttons
+	@param selected - boolean that is passed to select/deselect radio buttons
+	*/
 	private void setStateStatus(ToggleGroup stateCheckBox, boolean disable, boolean selected)
 	{
 		stateCheckBox.getToggles().forEach(toggle -> 
@@ -103,6 +113,10 @@ public class TuitionManagerController
 		});
 	}
 	
+	 /**
+	This is an event handler that enables tristate and international when nonresident is selected.
+	@param event - when the user clicks nonresident
+	*/
 	@FXML
 	void non_Resident_Event(ActionEvent event) // this enables tristate and international
 	{
@@ -110,6 +124,10 @@ public class TuitionManagerController
 		internationalCheckBox.setDisable(false);
 	}
 	
+	/**
+	This is an event that disables everything that isn't applicable to resident when it is selected.
+	@param event - when user clicks on resident
+	*/
 	@FXML
 	void resident_Event(ActionEvent event) // this disables and deselects tristate, international, states
 	{
@@ -122,6 +140,10 @@ public class TuitionManagerController
 		setStateStatus(stateCheckBox, true, false); 
 	}
 	
+	/**
+	This is an event handler that enables the state options when tristate is selected.
+	@param event - when user clicks on tristate
+	*/
 	@FXML
 	void tristate_Event(ActionEvent event) // this disables and deselects study abroad and enables states with connecticut as default state
 	{
@@ -130,6 +152,10 @@ public class TuitionManagerController
 		setStateStatus(stateCheckBox, false, true); 
 	}
 	
+	/**
+	This is an event handler that enables study abroad for students.
+	@param event - when user clicks on international
+	*/
 	@FXML
 	void international_Event(ActionEvent event) // this enables study abroad and disables+deselects state
 	{
@@ -137,6 +163,10 @@ public class TuitionManagerController
 		setStateStatus(stateCheckBox, true, false); 
 	}
 	
+	/**
+	This is an event handler that enables/disable creditSlider according to studyAbroad state.
+	@param event - when user clicks on studyAbroad
+	*/
 	@FXML
 	void studyAbroad_Event(ActionEvent event) // this  disables credit hours
 	{
@@ -197,6 +227,10 @@ public class TuitionManagerController
 			throw new Exception("Major is missing.\n");
 	}
 	
+	/**
+	Gets the student to be processed in Tab 1
+	@return student to be processed
+	*/
 	Student getStudentTab1()
 	{
 		String name;
@@ -271,7 +305,11 @@ public class TuitionManagerController
 		return student;
 	}
 	
-	
+	/**
+	This button creates an instance of student with the selected attributes. Also checks exceptions for
+	invalid/missing data.
+	@param event - when user clicks Add Student
+	*/
 	@FXML
     void add_a_student(ActionEvent event) // this is the event handler for adding a student
 	{
@@ -286,6 +324,11 @@ public class TuitionManagerController
 		}
     }
 	
+	/**
+	This button removes an instance of student with the selected attributes. Also checks exceptions for
+	invalid/missing data and if the student exists or not.
+	@param event - when user clicks Remove Student
+	*/
     @FXML
     void remove_a_student(ActionEvent event) // this is the event handler for removing a student
     {	
@@ -324,6 +367,10 @@ public class TuitionManagerController
 		}
     }
 	
+    /**
+    This method gets the tuition due for a student.
+    @param event - when user clicks on Tuition Due
+    */
     @FXML
     void get_tuition_due(ActionEvent event) // this is the event handler for displaying the tuition due for a student
     {
@@ -451,6 +498,11 @@ public class TuitionManagerController
 		}
 	}
 	
+	/**
+	This button takes in the student name/major and get the payment and date to pay their tuition. It
+	also checks for invalid dates and amounts.
+	@param event - when user clicks on Pay
+	*/
     @FXML
     void pay_tuition(ActionEvent event) // this is for paying tuition 
     {
@@ -514,6 +566,11 @@ public class TuitionManagerController
 		}
     }
 	
+    /**
+    This method sets the financial aid for resident students. It checks if the amount is valid
+    and if they have received financial aid before.
+    @param event - when user clicks on Set
+    */
     @FXML
     void set_financial_aid(ActionEvent event) // this is for setting a student's financial aid amount
     {
@@ -575,24 +632,40 @@ public class TuitionManagerController
 	@FXML
 	private TextArea messageBoxTab3; // for printing out list of students
 	
+	/**
+	This method prints the list of students in any order.
+	@param event - when user clicks on Print List
+	*/
     @FXML
     void print_list(ActionEvent event) 
     {
     	messageBoxTab3.appendText(studentRoster.print());
     }
-
+    
+    /**
+    This method prints the list of students by name in alphabetical order.
+    @param event - when user clicks on Print by Name
+    */
     @FXML
     void print_by_name(ActionEvent event) 
     {
     	messageBoxTab3.appendText(studentRoster.printByStudentNames());
     }
     
+    /**
+    This method prints the list of students by payment date.
+    @param event - when user clicks on Print by Date
+    */
     @FXML
     void print_by_date(ActionEvent event) 
     {
     	messageBoxTab3.appendText(studentRoster.printByPaymentDate());
     }
     
+    /**
+    This method calculates tuition dues for all students.
+    @param event - when user clicks on Calculate Tuition
+    */
     @FXML
     void calculate_all_tuition(ActionEvent event) 
     {

@@ -5,9 +5,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 
+/**
+Main class that starts the GUI program.
+@author David Halim, Stephen Juan
+*/
 public class Main extends Application {
+	/**
+    Starts the GUI and initializes the scene
+    @param primaryStage of the GUI
+    */
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -22,6 +29,10 @@ public class Main extends Application {
 		}
 	}
 	
+	/**
+    This is a main method that calls launch method.
+    @param args - user input - this is not used
+    */
 	public static void main(String[] args) {
 		launch(args);
 	}
