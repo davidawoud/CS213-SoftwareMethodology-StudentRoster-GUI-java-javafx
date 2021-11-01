@@ -140,7 +140,10 @@ public class TuitionManagerController
 	@FXML
 	void studyAbroad_Event(ActionEvent event) // this  disables credit hours
 	{
-		creditSlider.setDisable(true);
+		if (creditSlider.isDisabled())
+		    creditSlider.setDisable(false);
+		else
+			creditSlider.setDisable(true);
 	}
 	
 	/**
@@ -240,7 +243,11 @@ public class TuitionManagerController
 				{
 					boolean studyAbroad = false;
 					if (studyAbroadBox.isSelected()) // student is study abroad
+					{
 						studyAbroad = true;
+						creditHours = 12;
+						messageBox.appendText("Study Abroad Student automatically gets 12 credits.\n");
+					}
 					student = new International(new Profile(name,major.toString()),
 							                              creditHours,studyAbroad);	
 				}
